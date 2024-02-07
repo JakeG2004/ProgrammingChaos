@@ -1,8 +1,8 @@
 particle[] swarm;
-int swarmSize = 600;
+int swarmSize = 4800;
 
 void setup(){
-  size(900, 1000);
+  size(2560, 1600);
   colorMode(HSB, 360, 100, 100);
   
   //init swarm
@@ -14,7 +14,7 @@ void setup(){
   //init starter freeze
   swarm[0].frozen = true;
   swarm[0].x = width * .5;
-  swarm[0].y = height - 5;
+  swarm[0].y = height * .5;
   swarm[0].radius = 15;
 }
 

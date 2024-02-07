@@ -1,6 +1,6 @@
 float noise = 10.0;
-float freezeDist = 15;
-float gravity = 2;
+float freezeDist = 25;
+float gravity = 0;
 float freezeDistSqrd = freezeDist * freezeDist;
 
 class particle{
@@ -74,6 +74,7 @@ class particle{
     
     //draw connecting line to parent
     if(parent != null){
+      strokeWeight(radius / 2);
       stroke(hue, 100, 100);
       line(x, y, parent.x, parent.y);
     }

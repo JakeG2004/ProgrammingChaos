@@ -1,5 +1,5 @@
 float noise = 10.0;
-float freezeDist = 15;
+float freezeDist = 25;
 float gravity = 2;
 float freezeDistSqrd = freezeDist * freezeDist;
 
@@ -21,11 +21,6 @@ class particle{
   }
   
   void update(){
-    //float xSign = (x - (width * 0.5)) / (abs(x - (width * 0.5)));
-    //float ySign = (y - (height * 0.5)) / (abs(y - (height * 0.5)));
-    float xBias = -3 * cos(x - (width * .5));
-    float yBias = -3 * sin(y - (height * .5));
-    
     //skip if frozen
     if(frozen){
       return;
@@ -34,8 +29,8 @@ class particle{
     
     
     //update position with noise
-    x += random(-noise, noise) + xBias;
-    y += random(-noise, noise) + yBias;// + gravity;
+    x += random(-noise, noise);
+    y += random(-noise, noise);
     
     //wrap if on edge
     x = (x + width) % width;
@@ -49,7 +44,6 @@ class particle{
     checkFreezing();
   }
   
-  //TODO: Snap attachments to 45 degree angles
   void checkFreezing(){
     float dx, dy, distance;
     for(int i = 0; i < swarmSize; i++){
@@ -65,7 +59,7 @@ class particle{
               frozen = true;
               parent = swarm[i];
               hue = (parent.hue + 4) % 360;
-              radius = parent.radius * 0.98;
+              radius = parent.radius * 0.99;
               
               //place particle
               
@@ -81,7 +75,8 @@ class particle{
                 return;
               }
               
-              y = parent.y - freezeDist;
+              //snap on 45s
+              y = parent.y + (freezeDist * (dy / abs(dy)));
               x = parent.x + (freezeDist * (dx / abs(dx)));
           
               return;
@@ -96,6 +91,7 @@ class particle{
     //draw connecting line to parent
     if(parent != null){
       stroke(hue, 100, 100);
+      strokeWeight(radius * .5);
       line(x, y, parent.x, parent.y);
     }
     
