@@ -7,7 +7,7 @@ void setup(){
   rectMode(CENTER);
   colorMode(HSB, 255, 100, 100);
   
-  //noStroke();
+  noStroke();
   c = color(0, 100, 100);
 }
 
@@ -23,6 +23,8 @@ void mySquare(float x, float y, float len, int depth){
     mySquare(x + len * scale, y - len * scale, len * scale, depth + 1); //bottom left
     mySquare(x - len * scale, y + len * scale, len * scale, depth + 1); //upper right
   }
+  
+  //modulate color based on depth
   c = color((255 / maxRecursionDepth) * depth, 100, 100);
   fill(c);
   rect(x ,y ,len, len);
