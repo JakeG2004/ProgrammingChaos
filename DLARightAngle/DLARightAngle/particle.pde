@@ -34,11 +34,7 @@ class particle{
     
     //wrap if on edge
     x = (x + width) % width;
-    //y = (y + height) % height;
-    if(y > height){
-      y = 1;
-      x = random(width);
-    }
+    y = (y + height) % height;
     
     //check for freeze
     checkFreezing();

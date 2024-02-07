@@ -2,7 +2,7 @@ particle[] swarm;
 int swarmSize = 3600;
 
 void setup(){
-  size(2560, 1600);
+  size(2660, 1700);
   colorMode(HSB, 360, 100, 100);
   
   //init swarm
